@@ -8,8 +8,12 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <a href="oyun1.html">Oyunu Oyna</a>
-    <br>
-    <img src="resim1.png" alt="Oyun Resmi">
+    <h1>Oyun Sayfası</h1>
+    
+    <!-- Oyun bağlantısı -->
+    <a href="oyun1.html" class="play-button">Oyunu Oyna</a>
+
+    <!-- Oyun görseli -->
+    <img src="resim.png" alt="Oyun Resmi" class="game-image">
 </body>
 </html>
