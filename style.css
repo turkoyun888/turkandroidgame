@@ -1,5 +1,11 @@
 body {
+    display: block; /* Flex özelliğini kaldırarak normal hizalamaya dön */
     margin: 0;
-    padding: 20px; /* Üstten biraz boşluk bırakır */
-    background-color: #87CEEB; /* Eski arka plan rengini geri getirir */
+    padding: 20px;
+    background-color: #87CEEB; /* Mevcut arka plan rengin */
+}
+
+h1, p {
+    margin: 0;
+    padding: 0;
 }
