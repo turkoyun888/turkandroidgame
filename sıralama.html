@@ -1,12 +1,54 @@
-turk-oyun/
-│── index.html
-│── css/
-│   ├── style.css
-│── js/
-│   ├── script.js
-│── games/
-│   ├── aksiyon/
-│   ├── macera/
-│── assets/
-│   ├── images/
-│   ├── sounds/
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oyun Kategorileri</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+
+    <h1>Oyun Kategorileri</h1>
+
+    <div id="kategori-listesi">
+        <h2>Aksiyon Oyunları</h2>
+        <ul id="aksiyon-oyunlari"></ul>
+
+        <h2>Macera Oyunları</h2>
+        <ul id="macera-oyunlari"></ul>
+
+        <h2>Spor Oyunları</h2>
+        <ul id="spor-oyunlari"></ul>
+    </div>
+
+    <script>
+        // Oyun kategorileri ve oyunları dinamik olarak listele
+        const oyunlar = {
+            aksiyon: [
+                { ad: "Savaşçı", link: "games/aksiyon/savasci.html" },
+                { ad: "Kılıç Ustası", link: "games/aksiyon/kilic-ustasi.html" }
+            ],
+            macera: [
+                { ad: "Orman Kaşifi", link: "games/macera/orman-kasifi.html" }
+            ],
+            spor: [
+                { ad: "Futbol Şampiyonu", link: "games/spor/futbol-sampiyonu.html" }
+            ]
+        };
+
+        Object.keys(oyunlar).forEach(kategori => {
+            const ul = document.getElementById(`${kategori}-oyunlari`);
+            oyunlar[kategori].forEach(oyun => {
+                let li = document.createElement("li");
+                let a = document.createElement("a");
+                a.href = oyun.link;
+                a.innerText = oyun.ad;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+        });
+    </script>
+
+</body>
+</html>
