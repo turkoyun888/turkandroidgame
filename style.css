@@ -1,49 +1,36 @@
-/* Genel ayarlar */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    margin: 0;
-    padding: 20px;
     text-align: center;
+    background-color: #f4f4f4;
 }
 
-/* Başlık stilleri */
-h1 {
-    color: #d32f2f;
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-h2 {
-    color: #388e3c;
+header {
+    background-color: #ff0000;
+    padding: 15px;
+    color: white;
     font-size: 24px;
-    margin-top: 30px;
 }
 
-/* Paragraf stilleri */
-p {
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-/* Oyun listesi */
-ul {
-    list-style-type: none;
+nav ul {
+    list-style: none;
     padding: 0;
 }
 
-li {
-    margin: 10px 0;
+nav ul li {
+    display: inline;
+    margin-right: 15px;
 }
 
-/* Link stilleri */
-a {
+.oyun-link {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    background-color: #008000;
+    color: white;
     text-decoration: none;
-    color: #1976d2;
-    font-weight: bold;
+    border-radius: 5px;
 }
 
-a:hover {
-    text-decoration: underline;
+.oyun-link:hover {
+    background-color: #006600;
 }
