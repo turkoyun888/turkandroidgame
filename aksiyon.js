@@ -5,23 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aksiyon Oyunları</title>
     <link rel="stylesheet" href="style.css">
+    <script src="1ball.js" defer></script> 
     <style>
-        a {
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: red;
+        }
+        .oyun-container {
+            margin-top: 20px;
+        }
+        .oyun-btn {
             display: inline-block;
             padding: 10px 20px;
-            margin-top: 20px;
             background-color: #ff0000;
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            font-size: 18px;
         }
-        a:hover {
+        .oyun-btn:hover {
             background-color: #cc0000;
         }
     </style>
 </head>
 <body>
     <h1>Aksiyon Oyunları</h1>
-    <a href="games/aksiyon/oyun1.html">Aksiyon Oyununu Oyna</a>
+    <p>En iyi aksiyon oyunlarını burada oynayabilirsiniz!</p>
+
+    <div class="oyun-container">
+        <a href="oyun1.html" class="oyun-btn">Aksiyon Oyununu Oyna</a>
+    </div>
 </body>
 </html>
