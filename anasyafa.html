@@ -37,6 +37,37 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <script>
+        // Oyunları yükleme fonksiyonu
+        function loadGames() {
+            const games = {
+                aksiyon: [
+                    { name: "Kılıç Savaşçısı", link: "games/aksiyon/oyun1.html" },
+                    { name: "Silah Çatışması", link: "games/aksiyon/oyun2.html" }
+                ],
+                macera: [
+                    { name: "Orman Kaşifi", link: "games/macera/oyun1.html" }
+                ],
+                spor: [
+                    { name: "Futbol Şampiyonu", link: "games/spor/oyun1.html" }
+                ]
+            };
+
+            Object.keys(games).forEach(category => {
+                const container = document.getElementById(`${category}-games`);
+                games[category].forEach(game => {
+                    let a = document.createElement("a");
+                    a.href = game.link;
+                    a.innerText = game.name;
+                    a.style.display = "block";
+                    container.appendChild(a);
+                });
+            });
+        }
+
+        // Sayfa yüklendiğinde çalıştır
+        document.addEventListener("DOMContentLoaded", loadGames);
+    </script>
+
 </body>
 </html>
