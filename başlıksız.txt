@@ -1,0 +1,4 @@
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+<a href="oyun1.html">Oyunu Oyna</a>
+<img src="resim1.png" alt="Oyun Resmi">

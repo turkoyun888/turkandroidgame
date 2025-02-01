@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oyun Sayfası</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <a href="oyun1.html">Oyunu Oyna</a>
+    <br>
+    <img src="resim1.png" alt="Oyun Resmi">
+</body>
+</html>

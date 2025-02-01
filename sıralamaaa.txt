@@ -1,0 +1,12 @@
+turk-oyun/
+│── index.html
+│── css/
+│   ├── style.css
+│── js/
+│   ├── script.js
+│── games/
+│   ├── aksiyon/
+│   ├── macera/
+│── assets/
+│   ├── images/
+│   ├── sounds/

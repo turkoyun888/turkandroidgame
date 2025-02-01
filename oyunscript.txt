@@ -1,0 +1,42 @@
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = 800;
+canvas.height = 400;
+
+// Oyuncu ve top nesneleri
+const player = { x: 100, y: 180, radius: 20, color: "black" };
+const ball = { x: 400, y: 200, radius: 10, color: "white" };
+
+// Oyunu çizme fonksiyonu
+function draw() {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Oyuncuyu çiz
+    ctx.beginPath();
+    ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
+    ctx.fillStyle = player.color;
+    ctx.fill();
+    ctx.closePath();
+
+    // Topu çiz
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+    ctx.fillStyle = ball.color;
+    ctx.fill();
+    ctx.closePath();
+}
+
+// Hareket ettirme fonksiyonu (geliştirilebilir)
+function update() {
+    // Buraya oyuncu hareket kodları eklenebilir
+}
+
+// Oyun döngüsü
+function gameLoop() {
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+}
+gameLoop();

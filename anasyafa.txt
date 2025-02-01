@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Türk Oyun</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Türk Oyun</h1>
+        <input type="text" id="search" placeholder="Oyun Ara...">
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#aksiyon">Aksiyon</a></li>
+            <li><a href="#macera">Macera</a></li>
+            <li><a href="#spor">Spor</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="aksiyon">
+            <h2>Aksiyon Oyunları</h2>
+            <div class="game-list" id="aksiyon-games"></div>
+        </section>
+
+        <section id="macera">
+            <h2>Macera Oyunları</h2>
+            <div class="game-list" id="macera-games"></div>
+        </section>
+
+        <section id="spor">
+            <h2>Spor Oyunları</h2>
+            <div class="game-list" id="spor-games"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

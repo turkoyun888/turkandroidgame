@@ -1,0 +1,9 @@
+turk-oyun/
+│── index.html
+│── style.css
+│── script.js
+│── oyun1.html
+│── oyun2.html
+│── oyun3.html
+│── resim1.png
+│── resim2.png
