@@ -1,11 +1,13 @@
 body {
-    display: block; /* Flex özelliğini kaldırarak normal hizalamaya dön */
+    display: block !important; /* Flex veya grid'i tamamen devre dışı bırak */
+    text-align: left; /* Yazıları sola hizala */
     margin: 0;
     padding: 20px;
-    background-color: #87CEEB; /* Mevcut arka plan rengin */
+    background-color: white; /* Eski haline döndür */
 }
 
 h1, p {
     margin: 0;
     padding: 0;
+    color: black; /* Metin rengini siyah yap */
 }
