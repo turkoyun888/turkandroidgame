@@ -34,3 +34,29 @@ nav ul li {
 .oyun-link:hover {
     background-color: #006600;
 }
+body {
+    text-align: center;
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+.play-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.play-button:hover {
+    background-color: #218838;
+}
+
+.game-image {
+    margin-top: 20px;
+    width: 300px; /* Resmin boyutunu ayarlayabilirsin */
+    border: 2px solid #000;
+}
