@@ -1,9 +1,4 @@
-turk-oyun/
-│── index.html
-│── style.css
-│── script.js
-│── oyun1.html
-│── oyun2.html
-│── oyun3.html
-│── resim1.png
-│── resim2.png
+# Oyun Adı | Kategori | Dosya Yolu
+Oyun 1 | aksiyon | games/aksiyon/oyun1.html
+Oyun 2 | macera  | games/macera/oyun2.html
+Oyun 3 | spor    | games/spor/oyun3.html
