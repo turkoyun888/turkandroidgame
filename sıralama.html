@@ -4,51 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oyun Kategorileri</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Oyun Kategorileri</h1>
+    <header>
+        <h1>Oyun Kategorileri</h1>
+    </header>
 
-    <div id="kategori-listesi">
-        <h2>Aksiyon Oyunları</h2>
-        <ul id="aksiyon-oyunlari"></ul>
+    <main>
+        <section class="kategori">
+            <h2>Aksiyon Oyunları</h2>
+            <ul>
+                <li><a href="games/aksiyon/savasci.html">Savaşçı</a></li>
+                <li><a href="games/aksiyon/kilic-ustasi.html">Kılıç Ustası</a></li>
+            </ul>
+        </section>
 
-        <h2>Macera Oyunları</h2>
-        <ul id="macera-oyunlari"></ul>
+        <section class="kategori">
+            <h2>Macera Oyunları</h2>
+            <ul>
+                <li><a href="games/macera/orman-kasifi.html">Orman Kaşifi</a></li>
+            </ul>
+        </section>
 
-        <h2>Spor Oyunları</h2>
-        <ul id="spor-oyunlari"></ul>
-    </div>
-
-    <script>
-        // Oyun kategorileri ve oyunları dinamik olarak listele
-        const oyunlar = {
-            aksiyon: [
-                { ad: "Savaşçı", link: "games/aksiyon/savasci.html" },
-                { ad: "Kılıç Ustası", link: "games/aksiyon/kilic-ustasi.html" }
-            ],
-            macera: [
-                { ad: "Orman Kaşifi", link: "games/macera/orman-kasifi.html" }
-            ],
-            spor: [
-                { ad: "Futbol Şampiyonu", link: "games/spor/futbol-sampiyonu.html" }
-            ]
-        };
-
-        Object.keys(oyunlar).forEach(kategori => {
-            const ul = document.getElementById(`${kategori}-oyunlari`);
-            oyunlar[kategori].forEach(oyun => {
-                let li = document.createElement("li");
-                let a = document.createElement("a");
-                a.href = oyun.link;
-                a.innerText = oyun.ad;
-                li.appendChild(a);
-                ul.appendChild(li);
-            });
-        });
-    </script>
+        <section class="kategori">
+            <h2>Spor Oyunları</h2>
+            <ul>
+                <li><a href="games/spor/futbol-sampiyonu.html">Futbol Şampiyonu</a></li>
+            </ul>
+        </section>
+    </main>
 
 </body>
 </html>
