@@ -1,4 +1,33 @@
-# Oyun Adı | Kategori | Dosya Yolu
-Oyun 1 | aksiyon | games/aksiyon/oyun1.html
-Oyun 2 | macera  | games/macera/oyun2.html
-Oyun 3 | spor    | games/spor/oyun3.html
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("oyunlar.json")
+        .then(response => response.json())
+        .then(oyunlar => {
+            const kategoriListesi = {};
+
+            // Oyunları kategorilere göre ayır
+            oyunlar.forEach(oyun => {
+                if (!kategoriListesi[oyun.category]) {
+                    kategoriListesi[oyun.category] = [];
+                }
+                kategoriListesi[oyun.category].push(oyun);
+            });
+
+            // HTML'e oyunları ekle
+            const container = document.getElementById("oyunlar-container");
+            for (const kategori in kategoriListesi) {
+                const section = document.createElement("div");
+                section.innerHTML = `<h2>${kategori.toUpperCase()}</h2>`;
+                
+                kategoriListesi[kategori].forEach(oyun => {
+                    const link = document.createElement("a");
+                    link.href = oyun.path;
+                    link.textContent = oyun.name;
+                    link.style.display = "block";
+                    section.appendChild(link);
+                });
+
+                container.appendChild(section);
+            }
+        })
+        .catch(error => console.error("Oyun verisi yüklenemedi:", error));
+});
