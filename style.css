@@ -1,49 +1,51 @@
+/* Genel Stil */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
+/* Üst Menü */
 header {
     background-color: #ff0000;
     padding: 15px;
     color: white;
     font-size: 24px;
+    font-weight: bold;
 }
 
+/* Navigasyon Menüsü */
 nav ul {
     list-style: none;
     padding: 0;
+    margin: 10px 0;
 }
 
 nav ul li {
     display: inline;
-    margin-right: 15px;
+    margin: 0 15px;
 }
 
-.oyun-link {
-    display: block;
-    padding: 10px;
-    margin: 5px;
-    background-color: #008000;
-    color: white;
+nav ul li a {
     text-decoration: none;
+    color: white;
+    background-color: #008000;
+    padding: 10px 15px;
     border-radius: 5px;
+    font-weight: bold;
 }
 
-.oyun-link:hover {
+nav ul li a:hover {
     background-color: #006600;
 }
-body {
-    text-align: center;
-    background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
-}
 
-.play-button {
+/* Oyun Linkleri */
+.oyun-link, .play-button {
     display: inline-block;
     padding: 10px 20px;
-    margin-top: 20px;
+    margin: 10px;
     background-color: #28a745;
     color: white;
     text-decoration: none;
@@ -51,12 +53,15 @@ body {
     font-size: 18px;
 }
 
-.play-button:hover {
+.oyun-link:hover, .play-button:hover {
     background-color: #218838;
 }
 
+/* Oyun Görselleri */
 .game-image {
     margin-top: 20px;
-    width: 300px; /* Resmin boyutunu ayarlayabilirsin */
+    width: 300px;
+    max-width: 100%;
     border: 2px solid #000;
+    border-radius: 5px;
 }
