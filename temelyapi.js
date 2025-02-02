@@ -2,6 +2,9 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+canvas.width = 800;
+canvas.height = 400;
+
 // Oyuncu nesnesi
 const player = {
     x: 100,
@@ -14,13 +17,14 @@ const player = {
 
 // Top nesnesi
 const ball = {
-    x: 200,
-    y: 320,
+    x: player.x + player.width / 2,
+    y: player.y - 10,
     radius: 10,
     dx: 0,
     dy: 0,
     speed: 7,
-    color: "white"
+    color: "white",
+    inMotion: false
 };
 
 // Klavye kontrolleri
@@ -30,36 +34,47 @@ window.addEventListener("keyup", (e) => keys[e.key] = false);
 
 // Oyuncu hareket fonksiyonu
 function movePlayer() {
-    if (keys["ArrowLeft"]) player.x -= player.speed;
-    if (keys["ArrowRight"]) player.x += player.speed;
-    if (keys["ArrowUp"]) player.y -= player.speed;
-    if (keys["ArrowDown"]) player.y += player.speed;
+    if (keys["ArrowLeft"] && player.x > 0) player.x -= player.speed;
+    if (keys["ArrowRight"] && player.x + player.width < canvas.width) player.x += player.speed;
+    if (keys["ArrowUp"] && player.y > 0) player.y -= player.speed;
+    if (keys["ArrowDown"] && player.y + player.height < canvas.height) player.y += player.speed;
+
+    // Eğer top hareketsizse, oyuncuyla birlikte hareket eder
+    if (!ball.inMotion) {
+        ball.x = player.x + player.width / 2;
+        ball.y = player.y - 10;
+    }
 }
 
 // Şut atma fonksiyonu
 function shootBall() {
-    if (keys[" "]) {  // Boşluk tuşuna basınca şut at
-        ball.dx = ball.speed;
-        ball.dy = -Math.random() * 3; // Hafif yukarı eğimli şut
+    if (keys[" "] && !ball.inMotion) { // Boşluk tuşu + top hareketsizse
+        ball.dx = Math.random() * 4 - 2; // Hafif rastgele yönlendirme
+        ball.dy = -ball.speed;
+        ball.inMotion = true;
     }
 }
 
 // Topu hareket ettirme fonksiyonu
 function moveBall() {
+    if (!ball.inMotion) return; // Eğer top hareketsizse hareket ettirme
+
     ball.x += ball.dx;
     ball.y += ball.dy;
+    ball.dy += 0.2; // Yerçekimi efekti
 
-    // Sınırdan çıkmayı engelle
+    // Duvarlara çarpma
     if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
-        ball.dx = -ball.dx; // Sağ veya sol çarpınca yön değiştir
+        ball.dx *= -1;
     }
 
     if (ball.y - ball.radius < 0) {
-        ball.dy = -ball.dy; // Üst sınırdan sekme
+        ball.dy *= -1;
     }
 
-    // Top yere düşünce durması
+    // Yere düşme
     if (ball.y + ball.radius > canvas.height) {
+        ball.inMotion = false;
         ball.dy = 0;
         ball.dx = 0;
         ball.y = canvas.height - ball.radius;
