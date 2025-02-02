@@ -4,69 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Futbol Oyunu</title>
-    <style>
-        canvas {
-            display: block;
-            margin: auto;
-            background: #000;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
 </head>
 <body>
-    <h1>Futbol Oyunu</h1>
-    <canvas id="gameCanvas"></canvas>
-
     <script>
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
+        const config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 400,
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 300 },
+                    debug: false
+                }
+            },
+            scene: [Oyun1, Oyun2] // İki sahne tanımlandı
+        };
 
-        canvas.width = 800;
-        canvas.height = 400;
+        const game = new Phaser.Game(config);
 
-        const player = { x: 100, y: 180, radius: 20, color: "blue", speed: 5 };
-        const ball = { x: 400, y: 200, radius: 10, color: "red", dx: 2, dy: 2 };
-
-        const keys = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false };
-
-        document.addEventListener("keydown", (e) => { if (keys.hasOwnProperty(e.key)) keys[e.key] = true; });
-        document.addEventListener("keyup", (e) => { if (keys.hasOwnProperty(e.key)) keys[e.key] = false; });
-
-        function update() {
-            if (keys.ArrowUp && player.y > player.radius) player.y -= player.speed;
-            if (keys.ArrowDown && player.y < canvas.height - player.radius) player.y += player.speed;
-            if (keys.ArrowLeft && player.x > player.radius) player.x -= player.speed;
-            if (keys.ArrowRight && player.x < canvas.width - player.radius) player.x += player.speed;
-
-            ball.x += ball.dx;
-            ball.y += ball.dy;
-
-            if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) ball.dx *= -1;
-            if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) ball.dy *= -1;
+        function Oyun1() {
+            Phaser.Scene.call(this, { key: 'Oyun1' });
         }
+        Oyun1.prototype = Object.create(Phaser.Scene.prototype);
+        Oyun1.prototype.constructor = Oyun1;
 
-        function draw() {
-            ctx.fillStyle = "black";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        let player1, player2, ball, cursors;
 
-            ctx.beginPath();
-            ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
-            ctx.fillStyle = player.color;
-            ctx.fill();
-            ctx.closePath();
+        Oyun1.prototype.preload = function() {
+            this.load.image('ball', 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Soccerball.svg');
+        };
 
-            ctx.beginPath();
-            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-            ctx.fillStyle = ball.color;
-            ctx.fill();
-            ctx.closePath();
+        Oyun1.prototype.create = function() {
+            // Gökyüzü arka planı
+            this.cameras.main.setBackgroundColor('#87CEEB');  
+
+            // Yeşil zemin (halı saha hissi)
+            const field = this.add.graphics();
+            field.fillStyle(0x228B22, 1);
+            field.fillRect(0, 300, 800, 100);
+
+            // Kale ekleme
+            const goalLeft = this.add.rectangle(10, 250, 20, 100, 0xffffff);
+            const goalRight = this.add.rectangle(790, 250, 20, 100, 0xffffff);
+            this.physics.add.existing(goalLeft, true);
+            this.physics.add.existing(goalRight, true);
+
+            // Oyuncular (çöp adamlar)
+            player1 = this.physics.add.sprite(100, 250, null).setDisplaySize(30, 50).setTint(0xff0000);
+            player2 = this.physics.add.sprite(700, 250, null).setDisplaySize(30, 50).setTint(0x0000ff);
+
+            player1.setCollideWorldBounds(true);
+            player2.setCollideWorldBounds(true);
+
+            // Top
+            ball = this.physics.add.image(400, 250, 'ball').setDisplaySize(20, 20);
+            ball.setBounce(0.8);
+            ball.setCollideWorldBounds(true);
+
+            // Çarpışmalar
+            this.physics.add.collider(player1, ball);
+            this.physics.add.collider(player2, ball);
+            this.physics.add.collider(ball, goalLeft);
+            this.physics.add.collider(ball, goalRight);
+
+            // Kontroller
+            cursors = this.input.keyboard.createCursorKeys();
+
+            // Oyun 2'ye geçiş tuşu (B)
+            this.input.keyboard.on('keydown-B', () => {
+                this.scene.start('Oyun2');
+            });
+
+            this.add.text(10, 10, "B Tuşuna Bas: Oyun 2'ye Geç", { fontSize: '16px', fill: '#fff' });
+        };
+
+        Oyun1.prototype.update = function() {
+            if (cursors.left.isDown) {
+                player1.setVelocityX(-160);
+            } else if (cursors.right.isDown) {
+                player1.setVelocityX(160);
+            } else {
+                player1.setVelocityX(0);
+            }
+
+            if (cursors.up.isDown && player1.body.touching.down) {
+                player1.setVelocityY(-300);
+            }
+        };
+
+        function Oyun2() {
+            Phaser.Scene.call(this, { key: 'Oyun2' });
         }
+        Oyun2.prototype = Object.create(Phaser.Scene.prototype);
+        Oyun2.prototype.constructor = Oyun2;
 
-        function gameLoop() {
-            update();
-            draw();
-            requestAnimationFrame(gameLoop);
-        }
-        gameLoop();
+        Oyun2.prototype.create = function() {
+            this.cameras.main.setBackgroundColor('#000000'); // Siyah arka plan
+            this.add.text(300, 200, "Oyun 2 Modu", { fontSize: '32px', fill: '#fff' });
+
+            // Oyun 1'e geri dönmek için
+            this.input.keyboard.on('keydown-B', () => {
+                this.scene.start('Oyun1');
+            });
+
+            this.add.text(10, 10, "B Tuşuna Bas: Oyun 1'e Dön", { fontSize: '16px', fill: '#fff' });
+        };
     </script>
 </body>
 </html>
